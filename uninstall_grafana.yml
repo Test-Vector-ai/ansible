@@ -1,0 +1,36 @@
+---
+- name: Uninstall Grafana
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Stop Grafana service
+      systemd:
+        name: grafana-server
+        state: stopped
+        
+
+    - name: Remove Grafana package
+      package:
+        name: grafana
+        state: absent
+        
+
+    - name: Remove Grafana data directory
+      file:
+        path: /var/lib/grafana
+        state: directory
+        recurse: yes
+        owner: grafana
+        group: grafana
+        mode: 075
+        
+
+    - name: Remove Grafana configuration directory
+      file:
+        path: /etc/grafana
+        state: directory
+        recurse: yes
+        owner: grafana
+        group: grafana
+        mode: 075
