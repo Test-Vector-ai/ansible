@@ -6,7 +6,7 @@
   - name: Installing nginx
     apt:
       name: nginx
-      state: present
+      state: latest
   - name: Starting the nginx service
     service:
       name: nginx
